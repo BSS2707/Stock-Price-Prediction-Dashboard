@@ -18,7 +18,6 @@ st.title("Stock Price Prediction Dashboard")
 
 
 stocks = [
-    "AAPL",
     "MSFT",
     "GOOGL",
     "AMZN",
