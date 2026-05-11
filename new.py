@@ -28,15 +28,16 @@ def load_data(symbol):
         return pd.DataFrame()
 
 df = load_data(ticker)
-if df.empty:
+if df.empty or "Close" not in df.columns or df["Close"].dropna().empty:
+    st.error("No valid closing price data found for this ticker.")
     st.stop()
 
 st.write("Data preview:", df.head())
 
-close_prices = df["Close"]
-open_prices = df["Open"]
-high_prices = df["High"]
-low_prices = df["Low"]
+close_prices = df["Close"].dropna()
+open_prices = df["Open"].dropna()
+high_prices = df["High"].dropna()
+low_prices = df["Low"].dropna()
 
 last_close = float(close_prices.iloc[-1])
 prev_close = float(close_prices.iloc[-2])
